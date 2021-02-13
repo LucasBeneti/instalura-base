@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { MenuWrapper } from "../../../styles/MenuWrapper";
+import { MenuWrapper } from "./styles/MenuWrapper";
 import { Button } from "../../../components/commons/Button";
 import { Logo } from "../../../theme/Logo";
 import Text from "../../../foundation/Text";

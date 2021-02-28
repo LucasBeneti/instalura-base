@@ -55,9 +55,7 @@ export default function Home() {
                 md: 'left',
               }}
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy text
-              ever since the 1500s.
+              Lorem Ipsum is simply dummy text of the printing and typesetting induse 1500s.
             </Text>
 
             <Button

@@ -20,5 +20,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'implicit-arrow-linebreak': 'off',
     'object-curly-newline': 'off',
+    'react/prop-types': 'off',
   },
 };

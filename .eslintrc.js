@@ -21,5 +21,6 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'object-curly-newline': 'off',
     'react/prop-types': 'off',
+    'operator-linebreak': 'off',
   },
 };

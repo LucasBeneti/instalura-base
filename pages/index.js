@@ -6,9 +6,10 @@ import Modal from '../src/components/commons/Modal';
 import Text from '../src/foundation/Text';
 import { Grid } from '../src/foundation/Layout/Grid';
 import { Box } from '../src/foundation/Layout/Box';
+import FormCadastro from '../src/components/pattern/FormCadastro';
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   return (
     <Box
       flex={1}
@@ -26,11 +27,7 @@ export default function Home() {
           setIsModalOpen(false);
         }}
       >
-        {(propsModal) => (
-          <Box backgroundColor="white" {...propsModal}>
-            Nosso conteúdo pro modal
-          </Box>
-        )}
+        {(propsDoModal) => <FormCadastro propsDoModal={propsDoModal} />}
       </Modal>
       <Menu />
       <Grid.Container

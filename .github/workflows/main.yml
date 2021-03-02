@@ -28,10 +28,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: Node version!
         run: node -v
-     - name: Node version!
-        run: node -v
-     - name: Instalar dependencias
-        run: yarn install
-     - name: Roda o lint
-        run: yarn lint
+      - name: Node version!
+         run: node -v
+      - name: Instalar dependencias
+         run: yarn install
+      - name: Roda o lint
         run: yarn lint

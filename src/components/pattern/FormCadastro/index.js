@@ -57,13 +57,13 @@ function FormContent() {
 
             throw new Error('Não foi possível cadastrar o usuário agora :(');
           })
+          // eslint-disable-next-line no-unused-vars
           .then((data) => {
             setSubmissionStatus(formStates.DONE);
-            console.log(data);
           })
           .catch((error) => {
             setSubmissionStatus(formStates.ERROR);
-            console.log(error);
+            throw new Error(error);
           });
       }}
     >

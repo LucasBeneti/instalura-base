@@ -64,6 +64,7 @@ export default function FormCadastro({ propsDoModal }) {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...propsDoModal}
         >
+          {propsDoModal.CloseButton}
           <FormContent />
         </Box>
       </Grid.Col>

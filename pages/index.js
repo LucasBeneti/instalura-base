@@ -9,7 +9,7 @@ import { Box } from '../src/foundation/Layout/Box';
 import FormCadastro from '../src/components/pattern/FormCadastro';
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Box
       flex={1}
@@ -37,14 +37,7 @@ export default function Home() {
         }}
       >
         <Grid.Row>
-          <Grid.Col
-            value={{ xs: 12, md: 5 }}
-            offset={{ xs: 0, md: 1 }}
-            display="flex"
-            alignItems="flex-start"
-            justifyContent="center"
-            flexDirection="column"
-          >
+          <Grid.Col value={{ xs: 12, md: 5 }} offset={{ xs: 0, md: 1 }} display="flex" alignItems="flex-start" justifyContent="center" flexDirection="column">
             <Text
               variant="title"
               tag="h1"

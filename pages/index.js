@@ -1,13 +1,9 @@
 import React, { useContext } from 'react';
-import Menu from '../src/components/commons/Menu';
-import Footer from '../src/components/commons/Footer';
 import { Button } from '../src/components/commons/Button';
-import Modal from '../src/components/commons/Modal';
 import Text from '../src/foundation/Text';
 import { Grid } from '../src/foundation/Layout/Grid';
 import { Box } from '../src/foundation/Layout/Box';
 import { WebsitePageContext } from '../src/components/wrappers/WebSitePage';
-import FormCadastro from '../src/components/pattern/FormCadastro';
 import websitePageHOC from '../src/components/wrappers/WebSitePage/hoc';
 
 function HomeScreen() {

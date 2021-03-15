@@ -1,39 +1,24 @@
-import React, { useState } from 'react';
-import Menu from '../src/components/commons/Menu';
-import Footer from '../src/components/commons/Footer';
+import React, { useContext } from 'react';
 import { Button } from '../src/components/commons/Button';
-import Modal from '../src/components/commons/Modal';
 import Text from '../src/foundation/Text';
 import { Grid } from '../src/foundation/Layout/Grid';
 import { Box } from '../src/foundation/Layout/Box';
-import FormCadastro from '../src/components/pattern/FormCadastro';
+import { WebsitePageContext } from '../src/components/wrappers/WebSitePage';
+import websitePageHOC from '../src/components/wrappers/WebSitePage/hoc';
 
-export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function HomeScreen() {
+  const websitePageContext = useContext(WebsitePageContext);
   return (
     <Box
-      flex={1}
+      flex="1"
       display="flex"
-      flexWrap="wrap"
+      // flexWrap="wrap"
       flexDirection="column"
-      justifyContent="space-between"
-      backgroundImage="url(/images/bubbles.svg)"
-      backgroundRepeat="no-repeat"
-      backgroundPosition="bottom right"
+      // justifyContent="space-between"
+      // backgroundImage="url(/images/bubbles.svg)"
+      // backgroundRepeat="no-repeat"
+      // backgroundPosition="bottom right"
     >
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-        }}
-      >
-        {(propsDoModal) => <FormCadastro propsDoModal={propsDoModal} />}
-      </Modal>
-      <Menu
-        onCadastrarClick={() => {
-          setIsModalOpen(true);
-        }}
-      />
       <Grid.Container
         marginTop={{
           xs: '32px',
@@ -73,9 +58,7 @@ export default function Home() {
                 md: 'initial',
               }}
               display="block"
-              onClick={() => {
-                setIsModalOpen(!isModalOpen);
-              }}
+              onClick={() => websitePageContext.toggleModalCadastro()}
             >
               Cadastrar
             </Button>
@@ -94,8 +77,19 @@ export default function Home() {
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
-
-      <Footer />
     </Box>
   );
 }
+
+export default websitePageHOC(HomeScreen, {
+  pageWrapperProps: {
+    seoProps: {
+      headTitle: 'Home',
+    },
+    pageBoxProps: {
+      backgroundImage: 'url(/images/bubbles.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'bottom right',
+    },
+  },
+});

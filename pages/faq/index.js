@@ -1,5 +1,6 @@
 import React from 'react';
 import FAQScreen from '../../src/components/screens/FAQScreen';
+import websitePageHOC from '../../src/components/wrappers/WebSitePage/hoc';
 
 function FAQPage({ faqCategories }) {
   return <FAQScreen faqCategories={faqCategories} />;

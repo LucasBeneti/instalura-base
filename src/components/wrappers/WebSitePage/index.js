@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Footer from '../../commons/Footer';
 import Menu from '../../commons/Menu';
 import Modal from '../../commons/Modal';
-import { Box } from '../../foundation/layout/Box';
-import FormCadastro from '../../patterns/FormCadastro';
+import { Box } from '../../../foundation/Layout/Box';
+import FormCadastro from '../../pattern/FormCadastro';
 import SEO from '../../commons/SEO';
 
 export const WebsitePageContext = React.createContext({

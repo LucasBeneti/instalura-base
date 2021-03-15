@@ -58,8 +58,8 @@ const ButtonWrapper = styled.button`
 `;
 
 export function Button({ href, children, ...props }) {
-  const hasRef = Boolean(href);
-  const tag = hasRef ? Link : 'button';
+  const isLink = Boolean(href);
+  const tag = isLink ? Link : 'button';
 
   return (
     <ButtonWrapper as={tag} href={href} {...props}>
@@ -74,4 +74,5 @@ Button.defaultProps = {
 
 Button.propTypes = {
   href: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };

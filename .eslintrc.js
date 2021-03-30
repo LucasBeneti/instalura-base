@@ -2,8 +2,9 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'cypress/globals': true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:cypress/recommended', 'plugin:react/recommended', 'airbnb'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -23,5 +24,7 @@ module.exports = {
     'react/prop-types': 'off',
     'operator-linebreak': 'off',
     'max-len': 'off',
+    'spaced-comment': 'off',
+    'newline-per-chained-call': 'off',
   },
 };

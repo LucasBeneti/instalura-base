@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'cypress/global': true,
+    'cypress/globals': true,
   },
   extends: ['plugin:cypress/recommended', 'plugin:react/recommended', 'airbnb'],
   parserOptions: {
@@ -24,5 +24,7 @@ module.exports = {
     'react/prop-types': 'off',
     'operator-linebreak': 'off',
     'max-len': 'off',
+    'spaced-comment': 'off',
+    'newline-per-chained-call': 'off',
   },
 };

@@ -15,6 +15,6 @@ export const CloseButton = ({ onClose }) => (
     cursor="pointer"
     onClick={() => onClose()}
   >
-    <img src="images/closeButton.svg" alt="botão de fechar" />
+    <img src="/images/closeButton.svg" alt="botão de fechar" />
   </Box>
 );

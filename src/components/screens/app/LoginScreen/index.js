@@ -1,15 +1,15 @@
 import React from 'react';
-import Link from '../../src/components/commons/Link';
-import { Box } from '../../src/foundation/Layout/Box';
-import { Grid } from '../../src/foundation/Layout/Grid';
-import Text from '../../src/foundation/Text';
-import { WebsitePageContext } from '../../src/components/wrappers/WebSitePage';
-import websitePageHOC from '../../src/components/wrappers/WebSitePage/hoc';
-import { Logo } from '../../src/theme/Logo';
-import LoginForm from '../../src/components/pattern/FormLogin';
+import Link from '../../../commons/Link';
+import { Box } from '../../../../foundation/Layout/Box';
+import { Grid } from '../../../../foundation/Layout/Grid';
+import Text from '../../../../foundation/Text';
+import { WebsitePageContext } from '../../../wrappers/WebSitePage';
+import { Logo } from '../../../../theme/Logo';
+import LoginForm from '../../../pattern/FormLogin';
 
-function LoginScreen() {
+export default function LoginScreen() {
   const websitePageContext = React.useContext(WebsitePageContext);
+
   return (
     <Grid.Container display="flex" flex="1" alignItems="center">
       <Grid.Row flex="1" alignItems="center" justifyContent="center">
@@ -44,19 +44,3 @@ function LoginScreen() {
     </Grid.Container>
   );
 }
-
-export default websitePageHOC(LoginScreen, {
-  pageWrapperProps: {
-    seoProps: {
-      headTitle: 'Login',
-    },
-    menuProps: {
-      display: false,
-    },
-    pageBoxProps: {
-      backgroundImage: 'url(/images/bubbles.svg)',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'bottom right',
-    },
-  },
-});

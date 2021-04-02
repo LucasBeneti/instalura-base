@@ -12,7 +12,6 @@ export function useForm({ initialValues, onSubmit }) {
     handleChange(event) {
       const fieldName = event.target.getAttribute('name');
       const { value } = event.target;
-      console.log('fieldName', fieldName, value);
       setValues((currentValues) => ({
         ...currentValues,
         [fieldName]: value,

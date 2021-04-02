@@ -1,3 +1,5 @@
+import { destroyCookie, setCookie } from 'nookies';
+
 async function HttpClient(url, { headers, body, ...options }) {
   return fetch(url, {
     headers: {
@@ -23,8 +25,19 @@ export const loginService = {
         password,
       },
     }).then((responseConvertida) => {
-      console.log(responseConvertida);
-      return responseConvertida;
+      const { token } = responseConvertida.data;
+      const DAY_IN_SECONDS = 86400;
+      // salvar o token
+      setCookie(null, 'APP_TOKEN', token, {
+        path: '/',
+        maxAge: DAY_IN_SECONDS * 7,
+      });
+
+      //escrever os testes
+      return { token };
     });
+  },
+  logou() {
+    destroyCookie(null, 'APP_TOKEN');
   },
 };

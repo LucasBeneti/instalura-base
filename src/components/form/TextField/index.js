@@ -20,17 +20,45 @@ Input.defaultProps = {
   variant: 'paragraph1',
 };
 
-export default function TextField({ placeholder, name, onChange, value, ...props }) {
+export default function TextField({
+  placeholder,
+  name,
+  onChange,
+  value,
+  isTouched,
+  error,
+  ...props
+}) {
+  const isFieldInvalid = !!error && isTouched;
   return (
     <InputWrapper>
-      <Input type="text" placeholder={placeholder} name={name} onChange={onChange} value={value} {...props} />
+      <Input
+        type="text"
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        value={value}
+        {...props}
+      />
+      {isFieldInvalid && (
+        <Text variant="smallestException" color="error.main" role="alert">
+          {error}
+        </Text>
+      )}
     </InputWrapper>
   );
 }
+
+TextField.defaultProps = {
+  error: '',
+  isTouched: false,
+};
 
 TextField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  isTouched: PropTypes.bool,
+  error: PropTypes.string,
   value: PropTypes.string.isRequired,
 };

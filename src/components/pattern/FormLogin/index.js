@@ -14,28 +14,17 @@ const logingSchema = yup.object().shape({
     .min(8, 'Senha senha precisa ter ao menos 8 caracteres'),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
   const router = useRouter();
   const initialValues = {
     usuario: '',
     senha: '',
   };
 
-  // console.log(
-  //   'loging schema',
-  //   logingSchema
-  //     .validate({ usuairo: '', senha: '' }, { abortEarly: false })
-  //     .then((result) => {
-  //       console.log(result);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err.inner);
-  //     }),
-  // );
-
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
+      form.setIsFormDisabled(true);
       loginService
         .login({
           username: values.usuario,
@@ -43,14 +32,22 @@ export default function LoginForm() {
         })
         .then(() => {
           router.push('/app/profile');
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        })
+        .finally(() => {
+          form.setIsFormDisabled(false);
         });
     },
     async validateSchema(values) {
       return logingSchema.validate(values, { abortEarly: false });
     },
   });
+
   return (
-    <form id="formCadastro" onSubmit={form.handleSubmit}>
+    <form id="formCadastro" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"
@@ -83,7 +80,6 @@ export default function LoginForm() {
       >
         Entrar
       </Button>
-      <pre>{JSON.stringify(form.errors, null, 4)}</pre>
     </form>
   );
 }

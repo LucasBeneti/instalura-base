@@ -6,28 +6,26 @@ export function useForm({ initialValues, onSubmit, validateSchema }) {
   const [errors, setErrors] = useState({});
   const [touched, setTouchedFields] = useState({});
 
-  useEffect(() => {
-    validateSchema(values)
-      .then(() => {
-        setIsFormDisabled(false);
-        setErrors({});
-      })
-      .catch((err) => {
-        const formattedErrors = err.inner.reduce((errorObjectAcc, currError) => {
-          const fieldName = currError.path;
-          const errorMessage = currError.message;
-          return {
-            ...errorObjectAcc,
-            [fieldName]: errorMessage,
-          };
-        }, {});
-        setErrors(formattedErrors);
-        setIsFormDisabled(true);
-      });
-
-    if (values.usuario.length > 0) {
+  async function validateValues(currentValues) {
+    try {
+      await validateSchema(currentValues);
+      setErrors({});
       setIsFormDisabled(false);
+    } catch (err) {
+      const formattedErrors = err.inner.reduce((errorObjectAcc, currError) => {
+        const fieldName = currError.path;
+        const errorMessage = currError.message;
+        return {
+          ...errorObjectAcc,
+          [fieldName]: errorMessage,
+        };
+      }, {});
+      setErrors(formattedErrors);
+      setIsFormDisabled(true);
     }
+  }
+  useEffect(() => {
+    validateValues(values);
   }, [values]);
   return {
     values,
@@ -46,13 +44,13 @@ export function useForm({ initialValues, onSubmit, validateSchema }) {
     },
     handleBlur(event) {
       const fieldName = event.target.getAttribute('name');
-      const { value } = event.target;
       setTouchedFields({
         ...touched,
-        [fieldName]: value,
+        [fieldName]: true,
       });
     },
     isFormDisabled,
+    setIsFormDisabled,
     errors,
     touched,
   };

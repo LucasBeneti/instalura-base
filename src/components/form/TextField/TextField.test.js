@@ -1,7 +1,6 @@
 import React from 'react';
 import user from '@testing-library/user-event';
 import { render, screen } from '../../../infra/tests/testUtils';
-import WebsiteGlobalProvider from '../../wrappers/WebSitePage/provider';
 import TextField from './index';
 
 describe('<TextField />', () => {

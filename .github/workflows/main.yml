@@ -32,7 +32,8 @@ jobs:
         run: yarn install
       - name: Roda o lint
         run: yarn lint
-   unit_tests:
+        
+  unit_tests:
     name: Unit Tests
     runs-on: ubuntu-latest # The type of runner that the job will run on
     steps: # Steps represent a sequence of tasks that will be executed as part of the job

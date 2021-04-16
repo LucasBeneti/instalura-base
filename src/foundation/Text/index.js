@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import styled, { css } from 'styled-components';
 import propToStyle from '../../theme/utils/propToStyle';
 import { breakpointsMedia } from '../../theme/utils/breakpointsMedia';
 import Link from '../../components/commons/Link';
+import { WebsitePageContext } from '../../components/wrappers/WebSitePage/context';
 
 export const TextStyleVariantsMap = {
   smallestException: css`
@@ -41,7 +42,10 @@ const TextBase = styled.span`
   ${propToStyle('textAlign')}
 `;
 
-export default function Text({ tag, variant, children, href, ...props }) {
+export default function Text({ tag, variant, children, href, cmsKey, ...props }) {
+  const websitePageContext = useContext(WebsitePageContext);
+  const componentContent = cmsKey ? websitePageContext.getCMSContent(cmsKey) : children;
+
   if (href) {
     return (
       <TextBase
@@ -51,14 +55,14 @@ export default function Text({ tag, variant, children, href, ...props }) {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       >
-        {children}
+        {componentContent}
       </TextBase>
     );
   }
 
   return (
     <TextBase as={tag} variant={variant} {...props}>
-      {children}
+      {componentContent}
     </TextBase>
   );
 }
@@ -68,6 +72,7 @@ Text.propTypes = {
   variant: PropTypes.string,
   children: PropTypes.node,
   href: PropTypes.string,
+  cmsKey: PropTypes.string,
 };
 
 Text.defaultProps = {
@@ -75,4 +80,5 @@ Text.defaultProps = {
   variant: 'paragraph1',
   children: null,
   href: '',
+  cmsKey: '',
 };

@@ -3,8 +3,9 @@ import { Button } from '../src/components/commons/Button';
 import Text from '../src/foundation/Text';
 import { Grid } from '../src/foundation/Layout/Grid';
 import { Box } from '../src/foundation/Layout/Box';
-import { WebsitePageContext } from '../src/components/wrappers/WebSitePage';
 import websitePageHOC from '../src/components/wrappers/WebSitePage/hoc';
+
+import { WebsitePageContext } from '../src/components/wrappers/WebSitePage';
 
 function HomeScreen() {
   const websitePageContext = useContext(WebsitePageContext);
@@ -26,7 +27,14 @@ function HomeScreen() {
         }}
       >
         <Grid.Row>
-          <Grid.Col value={{ xs: 12, md: 5 }} offset={{ xs: 0, md: 1 }} display="flex" alignItems="flex-start" justifyContent="center" flexDirection="column">
+          <Grid.Col
+            value={{ xs: 12, md: 5 }}
+            offset={{ xs: 0, md: 1 }}
+            display="flex"
+            alignItems="flex-start"
+            justifyContent="center"
+            flexDirection="column"
+          >
             <Text
               variant="title"
               tag="h1"

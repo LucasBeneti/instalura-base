@@ -33,10 +33,15 @@ describe('loginService', () => {
             HttpClientModuleMock,
           );
 
-          expect(setCookieModuleMock).toHaveBeenLastCalledWith(null, 'APP_TOKEN', token, {
-            path: '/',
-            maxAge: 604800,
-          });
+          expect(setCookieModuleMock).toHaveBeenLastCalledWith(
+            null,
+            'LOGIN_COOKIE_APP_TOKEN',
+            token,
+            {
+              path: '/',
+              maxAge: 604800,
+            },
+          );
           expect(loginServiceResponse).toEqual({ token });
         });
       });
@@ -62,8 +67,10 @@ describe('loginService', () => {
     describe('when user tries to logout and succeeds', () => {
       it('remove its token', async () => {
         const destroyCookieMock = jest.fn();
-        await loginService.logout(destroyCookieMock);
-        expect(destroyCookieMock).toHaveBeenCalledWith(null, 'APP_TOKEN');
+        await loginService.logout(null, destroyCookieMock);
+        expect(destroyCookieMock).toHaveBeenCalledWith(null, 'LOGIN_COOKIE_APP_TOKEN', {
+          path: '/',
+        });
       });
     });
   });

@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { MenuProfileWrapper } from './styles/MenuProfileWrapper';
-import { Button } from '../Button';
 import { Logo } from '../../../theme/Logo';
-import Icon from '../Icon';
 import TextField from '../../form/TextField';
+import Icon from '../Icon';
+import { MenuProfileWrapper } from './styles/MenuProfileWrapper';
 
 const MenuProfile = ({ onAddClick }) => {
   const [search, setSearch] = useState('');
   function handleChange(event) {
-    const fieldName = event.target.getAttribute('name');
     setSearch(event.target.value);
   }
+
   return (
     <MenuProfileWrapper>
       <MenuProfileWrapper.LeftSide>

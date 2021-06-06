@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const IconWrapper = styled.span`
   cursor: pointer;
 `;
-const Icon = ({ iconImage }) => (
-  <IconWrapper>
+const Icon = ({ iconImage, onClick }) => (
+  <IconWrapper onClick={onClick}>
     <img src={`/images/${iconImage}`} alt="" />
   </IconWrapper>
 );

@@ -2,9 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Text from '../../../foundation/Text';
+import { Button } from '../../commons/Button';
 
 const InputWrapper = styled.div`
   margin-bottom: 17px;
+  display: flex;
 `;
 
 const Input = styled(Text)`
@@ -37,6 +39,8 @@ export default function TextField({
   value,
   isTouched,
   error,
+  icon,
+  putImage,
   ...props
 }) {
   const isFieldInvalid = !!error && isTouched;
@@ -56,6 +60,16 @@ export default function TextField({
           {error}
         </Text>
       )}
+
+      {icon && (
+        <Button
+          variant="secondary.main"
+          style={{ borderRadius: '0 12px 12px 0' }}
+          onClick={putImage}
+        >
+          {icon === 'rightArrow' && <RightArrow />}
+        </Button>
+      )}
     </InputWrapper>
   );
 }
@@ -72,4 +86,25 @@ TextField.propTypes = {
   isTouched: PropTypes.bool,
   error: PropTypes.string,
   value: PropTypes.string.isRequired,
+};
+
+const RightArrow = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5 12H19"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12 5L19 12L12 19"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
 };

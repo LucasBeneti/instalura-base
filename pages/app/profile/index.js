@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileScreen from '../../../src/components/screens/app/ProfileScreen';
 import { authService } from '../../../src/services/auth/authService';
 import { useUserService } from '../../../src/services/user/hook';
@@ -6,7 +6,16 @@ import websitePageHOC from '../../../src/components/wrappers/WebSitePage/hoc';
 
 const ProfilePage = () => {
   const dados = useUserService.getProfilePage();
-  return <ProfileScreen userData={dados} />;
+
+  // const [posts, setPosts] = useState([]);
+  // useEffect(() => {
+  //   if (dados.data.posts) {
+  //     setPosts([...posts, ...dados.data.posts]);
+  //   }
+  //   console.log(`posts: `, posts);
+  //   console.log(`dados`, dados);
+  // }, [posts]);
+  return <ProfileScreen userPosts={[]} />;
 };
 
 export default websitePageHOC(ProfilePage, {

@@ -12,7 +12,7 @@ export const typographyVariants = {
   },
   // [subTitle]
   subTitle: {
-    fontSize: '24px',
+    fontSize: '22px',
     fontWeight: '500',
     lineHeight: 1.25, // 125%
   },

@@ -34,6 +34,11 @@ export const TextStyleVariantsMap = {
       `,
     })}
   `,
+  subTitle: css`
+    font-size: ${({ theme }) => theme.typographyVariants.subTitle.fontSize};
+    font-weight: ${({ theme }) => theme.typographyVariants.subTitle.fontWeight};
+    line-height: ${({ theme }) => theme.typographyVariants.subTitle.lineHeight};
+  `,
 };
 
 const TextBase = styled.span`

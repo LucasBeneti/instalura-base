@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import Text from '../../../foundation/Text';
 import HeartIcon from '../HeartIcon';
-import Icon from '../Icon';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -37,7 +35,6 @@ const Post = ({ imgUrl, likes, key }) => {
 
   function handleLike() {
     setLiked(!liked);
-    console.log(`${liked ? 'like' : 'dislike'}`);
   }
   return (
     <PostWrapper onClick={handleLike} imgUrl={imgUrl} key={key}>

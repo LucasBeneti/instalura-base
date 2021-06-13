@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import useSWR from 'swr';
+import React from 'react';
 import ProfileScreen from '../../../src/components/screens/app/ProfileScreen';
-import { authService } from '../../../src/services/auth/authService';
-import { postService } from '../../../src/services/post/postService';
-import { useUserService } from '../../../src/services/user/hook';
 import websitePageHOC from '../../../src/components/wrappers/WebSitePage/hoc';
+import { authService } from '../../../src/services/auth/authService';
+import { userService } from '../../../src/services/user/userService';
 
-const ProfilePage = () => {
+const ProfilePage = ({ userInfo, posts }) => {
+  const rightPostOrder = posts.reverse();
+
   // const dados = useUserService.getProfilePage();
   // const { posts, error } = useSWR('api/users/posts', postService().getPosts);
   // const [posts, setPosts] = useState([]);
@@ -34,13 +34,13 @@ const ProfilePage = () => {
   //   }
   // }, [posts]);
 
-  return <ProfileScreen />;
+  return <ProfileScreen userInfo={userInfo} posts={rightPostOrder} />;
 };
 
 export default websitePageHOC(ProfilePage, {
   pageWrapperProps: {
     seoProps: {
-      headTitle: `Profile page`,
+      headTitle: 'Profile page',
     },
     menuProps: {
       display: false,
@@ -59,16 +59,17 @@ export async function getServerSideProps(ctx) {
   const auth = authService(ctx);
   const hasActiveSession = await auth.hasActiveSession();
   if (hasActiveSession) {
-    const session = await auth.getSession();
+    const user = await auth.getSession();
+    const dados = await userService.getProfilePage(ctx);
+
+    const posts = dados.posts.filter((post) => post.user === user.id);
+    const { userInfo } = dados;
     // const profilePage = await userService.getProfilePage(ctx);
 
     return {
       props: {
-        user: {
-          ...session,
-          // ...profilePage.user,
-        },
-        // posts: profilePage.posts,
+        userInfo,
+        posts,
       },
     };
   }

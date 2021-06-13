@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useSWR from 'swr';
-import Link from '../../../commons/Link';
-import { Box } from '../../../../foundation/Layout/Box';
-import { Grid } from '../../../../foundation/Layout/Grid';
 import Text from '../../../../foundation/Text';
-import { WebsitePageContext } from '../../../wrappers/WebSitePage';
-import { postService } from '../../../../services/post/postService';
-import { Logo } from '../../../../theme/Logo';
 import MenuProfile from '../../../commons/MenuProfile';
 import Modal from '../../../commons/Modal';
-import UploadImageModal from '../../../pattern/UploadImage';
 import Post from '../../../commons/Post';
+import UploadImageModal from '../../../pattern/UploadImage';
 
 const ProfileContentWrapper = styled.div`
   display: flex;
@@ -70,8 +63,8 @@ ProfileContentWrapper.Posts = styled.div`
   }
 `;
 
-export default function ProfileScreen() {
-  const { posts, error } = useSWR('api/users/posts', postService().getPosts);
+export default function ProfileScreen({ posts }) {
+  // const { posts, error } = useSWR('api/users/posts', postService().getPosts);
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
@@ -171,12 +164,11 @@ export default function ProfileScreen() {
         <ProfileContentWrapper.Posts>
           {posts ? (
             posts.map((post) => {
-              // console.log(post);
               return (
                 <Post
                   imgUrl={post.photoUrl}
                   likes={post.likes ? post.likes.length : 0}
-                  key={post._id}
+                  key={post._id ? post._id : 'adasd'}
                 />
               );
             })

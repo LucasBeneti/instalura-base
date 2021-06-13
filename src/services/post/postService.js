@@ -4,10 +4,10 @@ import { HttpClient } from '../../infra/http/HttpClient';
 import { isStagingEnv } from '../../infra/env/isStagingEnv';
 
 const BASE_URL = isStagingEnv
-  ? // Back End de DEV
-    'https://instalura-api.vercel.app'
-  : // Back End de PROD
-    'https://instalura-api.vercel.app';
+  ? // Back-end de DEV
+    'https://instalura-api-git-master-omariosouto.vercel.app'
+  : // Back-end de PROD
+    'https://instalura-api-omariosouto.vercel.app';
 
 export const postService = () => {
   const cookies = parseCookies();
@@ -15,37 +15,30 @@ export const postService = () => {
 
   return {
     async addPost({ photoUrl, description, filter }, HttpClientModule = HttpClient) {
-      try {
-        const response = await HttpClientModule(`${BASE_URL}/api/posts`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: {
-            photoUrl,
-            description,
-            filter,
-          },
+      return HttpClientModule(`${BASE_URL}/api/posts`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: {
+          photoUrl,
+          description,
+          filter,
+        },
+      })
+        .then((post) => post.data)
+        .catch((err) => {
+          throw new Error(err);
         });
-        return response.data;
-      } catch (error) {
-        throw new Error('Erro ao criar novo post...');
-      }
     },
-    async getPosts(path, HttpClientModule = HttpClient) {
-      try {
-        const url = `${BASE_URL}/${path}`;
-
-        const response = await HttpClientModule(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        return response.data;
-      } catch (err) {
-        throw new Error('Não foi possível pegar os posts');
-      }
+    async likeToggle({ postID }) {
+      return HttpClientModule(`${BASE_URL}/api/posts/${postID}/like`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: {},
+      });
     },
   };
 };

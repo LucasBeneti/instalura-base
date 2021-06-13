@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import { Box } from '../../../foundation/Layout/Box';
 import { postService } from '../../../services/post/postService';
-
 import { Button } from '../../commons/Button';
 import TextField from '../../form/TextField';
-import { Box } from '../../../foundation/Layout/Box';
 
 const UploadImageWrapper = styled.span`
   display: flex;
@@ -18,7 +16,7 @@ const UploadImageWrapper = styled.span`
   }
 `;
 
-const UploadImageModal = ({ propsDoModal, onClose }) => {
+const UploadImageModal = ({ propsDoModal }) => {
   const [uploadInfo, setUploadInfo] = useState({
     photoUrl: '',
     filter: 'original',
@@ -47,14 +45,10 @@ const UploadImageModal = ({ propsDoModal, onClose }) => {
         filter: uploadInfo.filter,
         description: uploadInfo.description,
       });
-      onClose();
+      return response;
     }
-    console.log('tentativa de postar uma imagem');
   };
 
-  // useEffect(() => {
-  //   console.log(`uploadInfo`, uploadInfo);
-  // }, [uploadInfo]);
   return (
     <UploadImageWrapper>
       <Box
@@ -131,8 +125,7 @@ const UploadImageModal = ({ propsDoModal, onClose }) => {
 export default UploadImageModal;
 
 /*
-  Para mostrar o filtro em cima da imagem, tem que ter o figure em volta 
-  de uma tag image.
+  Para mostrar o filtro em cima da imagem, tem que ter o figure em volta de uma tag image.
   O componente de carrossel receberia e setaria um estado nesse componente aqui
   que mostraria o filtro da imagem de preview.
 */

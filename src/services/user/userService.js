@@ -7,18 +7,21 @@ const BASE_URL = isStagingEnv
   : 'https://instalura-api.omariosouto.vercel.app';
 
 export const userService = {
-  async getProfilePage(ctx) {
+  async getProfilePage(ctx, HttpClientModule = HttpClient) {
     const url = `${BASE_URL}/api/users/posts`;
     try {
       const token = await authService(ctx).getToken();
-      const response = await HttpClient(url, {
+      const response = await HttpClientModule(url, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
       return {
-        user: {
-          totalLikes: 100,
+        userInfo: {
+          bio: 'A wholesome person responsible for the best movies ever.',
+          totalPosts: 234,
+          totalFollowing: 22000,
+          totalFollowers: 134000,
         },
         posts: response.data,
       };

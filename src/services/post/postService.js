@@ -32,5 +32,20 @@ export const postService = () => {
         throw new Error('Erro ao criar novo post...');
       }
     },
+    async getPosts(path, HttpClientModule = HttpClient) {
+      try {
+        const url = `${BASE_URL}/${path}`;
+
+        const response = await HttpClientModule(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        return response.data;
+      } catch (err) {
+        throw new Error('Não foi possível pegar os posts');
+      }
+    },
   };
 };

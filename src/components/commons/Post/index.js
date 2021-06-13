@@ -32,7 +32,7 @@ const PostWrapper = styled.div`
   }
 `;
 
-const Post = ({ imgUrl, likes }) => {
+const Post = ({ imgUrl, likes, key }) => {
   const [liked, setLiked] = useState(false);
 
   function handleLike() {
@@ -40,7 +40,7 @@ const Post = ({ imgUrl, likes }) => {
     console.log(`${liked ? 'like' : 'dislike'}`);
   }
   return (
-    <PostWrapper onClick={handleLike} imgUrl={imgUrl}>
+    <PostWrapper onClick={handleLike} imgUrl={imgUrl} key={key}>
       <span className="likesDisplay">
         <Text variant="paragraph1" style={{ fontWeight: 'bold', fontSize: '1.15rem' }}>
           {likes}
@@ -53,6 +53,7 @@ const Post = ({ imgUrl, likes }) => {
 
 Post.propTypes = {
   imgUrl: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
 };
 

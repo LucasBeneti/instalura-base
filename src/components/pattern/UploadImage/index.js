@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { postService } from '../../../services/post/postService';
+
 import { Button } from '../../commons/Button';
 import TextField from '../../form/TextField';
 import { Box } from '../../../foundation/Layout/Box';
@@ -16,10 +18,11 @@ const UploadImageWrapper = styled.span`
   }
 `;
 
-const UploadImageModal = ({ propsDoModal }) => {
+const UploadImageModal = ({ propsDoModal, onClose }) => {
   const [uploadInfo, setUploadInfo] = useState({
-    imageUrl: '',
-    filter: '',
+    photoUrl: '',
+    filter: 'original',
+    description: 'um dog qualquer',
   });
   const [putImageClicked, setPutImageClicked] = useState(false);
   const [goToFilters, setGoToFilters] = useState(false);
@@ -36,9 +39,22 @@ const UploadImageModal = ({ propsDoModal }) => {
     setPutImageClicked(!putImageClicked);
   }
 
-  useEffect(() => {
-    console.log(`uploadInfo`, uploadInfo);
-  }, [uploadInfo]);
+  const handleAddPost = async () => {
+    if (uploadInfo.photoUrl) {
+      console.log(`fazendo upload da imagem${uploadInfo.photoUrl}`);
+      const response = await postService().addPost({
+        photoUrl: uploadInfo.photoUrl,
+        filter: uploadInfo.filter,
+        description: uploadInfo.description,
+      });
+      onClose();
+    }
+    console.log('tentativa de postar uma imagem');
+  };
+
+  // useEffect(() => {
+  //   console.log(`uploadInfo`, uploadInfo);
+  // }, [uploadInfo]);
   return (
     <UploadImageWrapper>
       <Box
@@ -58,8 +74,8 @@ const UploadImageModal = ({ propsDoModal }) => {
         {/* {propsDoModal.CloseButton} */}
         <img
           src={
-            uploadInfo.imageUrl && putImageClicked
-              ? uploadInfo.imageUrl
+            uploadInfo.photoUrl && putImageClicked
+              ? uploadInfo.photoUrl
               : '/images/defaultImage.jpeg'
           }
           alt="foto do nicolas cage locao"
@@ -68,15 +84,7 @@ const UploadImageModal = ({ propsDoModal }) => {
 
         {goToFilters ? (
           <>
-            <TextField
-              placeholder="URL da imagem"
-              name="imageUrl"
-              value={uploadInfo.imageUrl}
-              onChange={handleChange}
-              icon="rightArrow"
-              putImage={viewImage}
-              style={{ borderRadius: '12px 0 0 12px' }}
-            />
+            <p>Descrição</p>
             <p>Aqui vai o carrousel dos filtros</p>
             <Button
               variant="primary.main"
@@ -85,7 +93,7 @@ const UploadImageModal = ({ propsDoModal }) => {
                 md: 'initial',
               }}
               display="block"
-              onClick={() => setGoToFilters(true)}
+              onClick={handleAddPost}
             >
               Postar
             </Button>
@@ -94,8 +102,8 @@ const UploadImageModal = ({ propsDoModal }) => {
           <>
             <TextField
               placeholder="URL da imagem"
-              name="imageUrl"
-              value={uploadInfo.imageUrl}
+              name="photoUrl"
+              value={uploadInfo.photoUrl}
               onChange={handleChange}
               icon="rightArrow"
               putImage={viewImage}
@@ -121,3 +129,10 @@ const UploadImageModal = ({ propsDoModal }) => {
 };
 
 export default UploadImageModal;
+
+/*
+  Para mostrar o filtro em cima da imagem, tem que ter o figure em volta 
+  de uma tag image.
+  O componente de carrossel receberia e setaria um estado nesse componente aqui
+  que mostraria o filtro da imagem de preview.
+*/

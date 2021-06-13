@@ -77,7 +77,12 @@ function FormContent() {
         <TextField placeholder="Nome" name="nome" value={userInfo.nome} onChange={handleChange} />
       </div>
       <div>
-        <TextField placeholder="Usuário" name="usuario" value={userInfo.usuario} onChange={handleChange} />
+        <TextField
+          placeholder="Usuário"
+          name="usuario"
+          value={userInfo.usuario}
+          onChange={handleChange}
+        />
       </div>
       <Button type="submit" variant="primary.main" disabled={isFormValid} fullWidth>
         Cadastrar

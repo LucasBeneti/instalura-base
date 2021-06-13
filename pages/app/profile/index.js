@@ -6,16 +6,27 @@ import websitePageHOC from '../../../src/components/wrappers/WebSitePage/hoc';
 
 const ProfilePage = () => {
   const dados = useUserService.getProfilePage();
+  const [posts, setPosts] = useState([]);
 
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {
-  //   if (dados.data.posts) {
-  //     setPosts([...posts, ...dados.data.posts]);
-  //   }
-  //   console.log(`posts: `, posts);
-  //   console.log(`dados`, dados);
-  // }, [posts]);
-  return <ProfileScreen userPosts={[]} />;
+  useEffect(() => {
+    if (dados.data) {
+      const incoming_posts = [];
+      Object.entries(dados.data.posts).map((post) => {
+        let aux_post = {};
+        aux_post[post[0]] = post[1];
+        incoming_posts.push(aux_post);
+      });
+      setPosts([...posts, ...incoming_posts]);
+    }
+  }, [dados]);
+
+  useEffect(() => {
+    if (posts) {
+      console.log(`posts`, posts);
+    }
+  }, [posts]);
+
+  return <ProfileScreen userPosts={posts} />;
 };
 
 export default websitePageHOC(ProfilePage, {

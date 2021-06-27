@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
 
 export const MenuProfileWrapper = styled.nav`
   font-family: 'Rubik', sans-serif;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '../../../foundation/Layout/Box';
 
-export const CloseButton = ({ onClose }) => (
+export const CloseButton = ({ onClose, position }) => (
   <Box
-    position="absolute"
+    position={position}
     top={{
       xs: '30px',
       md: '24px',

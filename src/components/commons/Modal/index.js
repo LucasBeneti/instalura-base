@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { motion } from 'framer-motion';
+import propToStyle from '../../../theme/utils/propToStyle';
 
 import { CloseButton } from '../CloseButton';
 
@@ -40,47 +41,54 @@ const LockScroll = createGlobalStyle`
   }
 `;
 
-const Modal = ({ isOpen, onClose, children }) => (
-  <ModalWrapper
-    isOpen={isOpen}
-    onClick={(event) => {
-      const isSafeArea = event.target.closest('[data-modal-safe-area=true]');
-      if (!isSafeArea) {
-        onClose();
-      }
-    }}
-  >
-    {isOpen && <LockScroll />}
-    <motion.div
-      variants={{
-        open: {
-          x: 0,
-        },
-        closed: {
-          x: '100%',
-        },
-      }}
-      animate={isOpen ? 'open' : 'closed'}
-      transition={{
-        duration: 0.3,
-      }}
-      style={{
-        display: 'flex',
-        flex: 1,
+const Modal = ({ isOpen, onClose, animation, children }) => {
+  return (
+    <ModalWrapper
+      isOpen={isOpen}
+      onClick={(event) => {
+        const isSafeArea = event.target.closest('[data-modal-safe-area=true]');
+        if (!isSafeArea) {
+          onClose();
+        }
       }}
     >
-      {children({
-        'data-modal-safe-area': 'true',
-        CloseButton: <CloseButton onClose={onClose} />,
-      })}
-    </motion.div>
-  </ModalWrapper>
-);
+      {isOpen && <LockScroll />}
+      <motion.div
+        variants={animation}
+        animate={isOpen ? 'open' : 'closed'}
+        transition={{
+          duration: 0.3,
+        }}
+        style={{
+          display: 'flex',
+          flex: 1,
+        }}
+      >
+        {children({
+          'data-modal-safe-area': 'true',
+          CloseButton: <CloseButton position={'absolute'} onClose={onClose} />,
+        })}
+      </motion.div>
+    </ModalWrapper>
+  );
+};
+
+Modal.defaultProps = {
+  animation: {
+    open: {
+      x: 0,
+    },
+    closed: {
+      x: '100%',
+    },
+  },
+};
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   children: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  animation: PropTypes.object,
 };
 
 export default Modal;

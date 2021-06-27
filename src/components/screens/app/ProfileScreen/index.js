@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Text from '../../../../foundation/Text';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
 import MenuProfile from '../../../commons/MenuProfile';
 import Modal from '../../../commons/Modal';
 import Post from '../../../commons/Post';
@@ -51,11 +52,15 @@ ProfileContentWrapper.Posts = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 4.5rem;
-  grid-gap: 0.75rem;
+  grid-gap: 0.25rem;
+  ${breakpointsMedia({
+    md: css`
+      grid-gap: 0.75rem;
+    `,
+  })}
   img {
     height: 15rem;
     width: 15rem;
-    /* border-radius: 50%; */
     object-fit: cover;
     :hover {
       opacity: 40%;
@@ -64,7 +69,6 @@ ProfileContentWrapper.Posts = styled.div`
 `;
 
 export default function ProfileScreen({ posts }) {
-  // const { posts, error } = useSWR('api/users/posts', postService().getPosts);
   const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
@@ -79,6 +83,17 @@ export default function ProfileScreen({ posts }) {
         onClose={() => {
           setModalState(false);
         }}
+        animation={{
+          open: {
+            scale: 1,
+            y: '12.5%',
+            x: '15%',
+          },
+          closed: {
+            scale: 0,
+            y: '100%',
+          },
+        }}
       >
         {(propsDoModal) => <UploadImageModal propsDoModal={propsDoModal} />}
       </Modal>
@@ -88,74 +103,29 @@ export default function ProfileScreen({ posts }) {
           <div className="infos">
             <div className="infoRow1">
               <div className="metrics">
-                <Text
-                  variant="paragraph1"
-                  // tag="p"
-                  color="tertiary.main"
-                  textAlign="left"
-                  // textAlign={{
-                  //   xs: 'center',
-                  //   md: 'left',
-                  // }}
-                >
+                <Text variant="paragraph1" color="tertiary.main" textAlign="left">
                   234
                 </Text>
-                <Text
-                  variant="paragraph1"
-                  // tag="p"
-                  color="tertiary.light"
-                  textAlign="left"
-                  // textAlign={{
-                  //   xs: 'center',
-                  //   md: 'left',
-                  // }}
-                >
+                <Text variant="paragraph1" color="tertiary.light" textAlign="left">
                   Publicações
                 </Text>
               </div>
               <div className="metrics">
                 <Text>22k</Text>
-                <Text
-                  variant="paragraph1"
-                  // tag="p"
-                  color="tertiary.light"
-                  textAlign="left"
-                  // textAlign={{
-                  //   xs: 'center',
-                  //   md: 'left',
-                  // }}
-                >
+                <Text variant="paragraph1" color="tertiary.light" textAlign="left">
                   Seguindo
                 </Text>
               </div>
               <div className="metrics">
                 <Text>134k</Text>
-                <Text
-                  variant="paragraph1"
-                  // tag="p"
-                  color="tertiary.light"
-                  textAlign="left"
-                  // textAlign={{
-                  //   xs: 'center',
-                  //   md: 'left',
-                  // }}
-                >
+                <Text variant="paragraph1" color="tertiary.light" textAlign="left">
                   Seguidores
                 </Text>
               </div>
             </div>
             <div className="infoRow2">
               <Text variant="subTitle">Nicolas Cage</Text>
-              <Text
-                variant="paragraph1"
-                // tag="p"
-                color="tertiary.light"
-                textAlign="left"
-                // textAlign={{
-                //   xs: 'center',
-                //   md: 'left',
-                // }}
-              >
+              <Text variant="paragraph1" color="tertiary.light" textAlign="left">
                 A wholesome person responsible for the best movies ever.
               </Text>
             </div>

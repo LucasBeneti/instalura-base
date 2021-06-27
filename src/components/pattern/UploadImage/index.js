@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Box } from '../../../foundation/Layout/Box';
 import { postService } from '../../../services/post/postService';
+import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { Button } from '../../commons/Button';
 import TextField from '../../form/TextField';
 
@@ -9,8 +10,8 @@ const UploadImageWrapper = styled.span`
   display: flex;
   flex-direction: column;
 
-  width: 30vw;
-  height: 45vh;
+  width: 70%;
+  height: 20%;
   .urlInput {
     display: flex;
   }
@@ -58,8 +59,8 @@ const UploadImageModal = ({ propsDoModal }) => {
         justifyContent="center"
         flex={1}
         padding={{
-          xs: '16px',
-          md: '85px',
+          xs: '1rem',
+          md: '3rem',
         }}
         backgroundColor="white"
         // eslint-disable-next-line react/jsx-props-no-spreading

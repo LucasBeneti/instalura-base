@@ -37,7 +37,7 @@ const Post = ({ imgUrl, likes, key }) => {
     setLiked(!liked);
   }
   return (
-    <PostWrapper onClick={handleLike} imgUrl={imgUrl} key={key}>
+    <PostWrapper onClick={handleLike} imgUrl={imgUrl} id={key}>
       <span className="likesDisplay">
         <Text variant="paragraph1" style={{ fontWeight: 'bold', fontSize: '1.15rem' }}>
           {likes}
@@ -50,7 +50,7 @@ const Post = ({ imgUrl, likes, key }) => {
 
 Post.propTypes = {
   imgUrl: PropTypes.string.isRequired,
-  key: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
 };
 

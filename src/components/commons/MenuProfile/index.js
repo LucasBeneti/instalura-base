@@ -93,23 +93,7 @@ const MenuProfile = ({ onAddClick }) => {
 
   return (
     <MenuProfileWrapper>
-      {/* <MenuProfileWrapper.LeftSide>
-        <Logo />
-      </MenuProfileWrapper.LeftSide> */}
-      {/* <MenuProfileWrapper.CentralSide>
-        <span
-          style={breakpointsMedia({
-            md: css`
-              display: 'flex';
-              justify-content: 'center';
-              align-items: 'center';
-            `,
-          })}
-        >
-          <TextField placeholder="Pesquisar" name="search" value={search} onChange={handleChange} />
-        </span>
-      </MenuProfileWrapper.CentralSide> */}
-      <Block>
+      <Block order={{ md: 3 }}>
         <Icon
           iconImage="homeIcon.svg"
           onClick={() => {
@@ -117,7 +101,7 @@ const MenuProfile = ({ onAddClick }) => {
           }}
         />
       </Block>
-      <Block>
+      <Block order={{ md: 1 }}>
         <Icon
           iconImage="searchIcon.svg"
           onClick={() => {
@@ -125,10 +109,10 @@ const MenuProfile = ({ onAddClick }) => {
           }}
         />
       </Block>
-      <Block>
+      <Block order={{ md: 2 }}>
         <Icon iconImage="postIcon.svg" onClick={onAddClick} />
       </Block>
-      <Block>
+      <Block order={{ md: 4 }}>
         <Icon
           iconImage="heartIcon.svg"
           onClick={() => {
@@ -136,7 +120,7 @@ const MenuProfile = ({ onAddClick }) => {
           }}
         />
       </Block>
-      <Block>
+      <Block order={{ md: 5 }}>
         <Icon
           iconImage="heartIcon.svg"
           onClick={() => {

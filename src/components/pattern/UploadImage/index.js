@@ -4,6 +4,7 @@ import { Box } from '../../../foundation/Layout/Box';
 import { postService } from '../../../services/post/postService';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { Button } from '../../commons/Button';
+import FilterCarroussel from '../../commons/FilterCarroussel';
 import TextField from '../../form/TextField';
 
 const UploadImageWrapper = styled.span`
@@ -80,7 +81,7 @@ const UploadImageModal = ({ propsDoModal }) => {
         {goToFilters ? (
           <>
             <p>Descrição</p>
-            <p>Aqui vai o carrousel dos filtros</p>
+            <FilterCarroussel imgUrl={uploadInfo.photoUrl} />
             <Button
               variant="primary.main"
               margin={{

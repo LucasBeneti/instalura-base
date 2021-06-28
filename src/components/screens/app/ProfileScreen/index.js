@@ -138,7 +138,7 @@ export default function ProfileScreen({ posts }) {
                 <Post
                   imgUrl={post.photoUrl}
                   likes={post.likes ? post.likes.length : 0}
-                  key={post._id ? post._id : 'adasd'}
+                  id={post._id ? post._id : 'adasd'}
                 />
               );
             })
